@@ -13,7 +13,7 @@ from time import sleep
 class Usb(Escpos):
     """ Define USB printer """
 
-    def __init__(self, idVendor, idProduct, interface=0, in_ep=0x82, out_ep=0x01):
+    def __init__(self, idVendor, idProduct, interface=0, in_ep=0x82, out_ep=0x02):
         """
         @param idVendor  : Vendor ID
         @param idProduct : Product ID

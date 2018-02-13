@@ -89,7 +89,7 @@ class EscposDriver(Thread):
             connected.append({
                 'vendor': printer.idVendor,
                 'product': printer.idProduct,
-                'name': usb.util.get_string(printer, 256, printer.iManufacturer) + " " + usb.util.get_string(printer, 256, printer.iProduct)
+                'name': "Bematech",
             })
 
         return connected
