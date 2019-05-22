@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
 import logging
-import os
 import time
 from os import listdir
-from os.path import join
-from threading import Thread, Lock
-from select import select
+from os.path import join, isdir
 from Queue import Queue, Empty
+from select import select
+from threading import Thread, Lock
 
-import openerp
-import openerp.addons.hw_proxy.controllers.main as hw_proxy
-from openerp import http
-from openerp.http import request
-from openerp.tools.translate import _
+from odoo import http
+
+import odoo.addons.hw_proxy.controllers.main as hw_proxy
 
 _logger = logging.getLogger(__name__)
 
@@ -120,7 +119,10 @@ class Scanner(Thread):
     def get_devices(self):
         try:
             if not evdev:
-                return None
+                return []
+
+            if not isdir(self.input_dir):
+                return []
 
             new_devices = [device for device in listdir(self.input_dir)
                            if join(self.input_dir, device) not in [dev.evdev.fn for dev in self.open_devices]]
